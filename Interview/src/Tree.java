@@ -7,29 +7,31 @@ public class Tree {
 		Tree tree = new Tree();
 		tree.val = 10;
 		tree.left = new Tree();
-		tree.left.val = 11;
+		tree.left.val = 10;
 		tree.right = new Tree();
-		tree.right.val = 12;
+		tree.right.val = 10;
 		tree.left.left = new Tree();
-		tree.left.left.val = 7;
+		tree.left.left.val = 10;
 		tree.right.right = new Tree();
-		tree.right.right.val = 8;
+		tree.right.right.val = 10;
 
-		Tree another = new Tree();
-		another.val = 10;
-		another.left = new Tree();
-		another.left.val = 11;
-		another.right = new Tree();
-		another.right.val = 12;
-		another.left.left = new Tree();
-		another.left.left.val = 7;
-		another.right.right = new Tree();
-		another.right.right.val = 8;
-		// System.out.println(tree.equals(another));
-		System.out.println(tree);
-		tree.revert();
-		System.out.println(tree);
 		System.out.println(tree.isSymetric());
+
+		// Tree another = new Tree();
+		// another.val = 10;
+		// another.left = new Tree();
+		// another.left.val = 11;
+		// another.right = new Tree();
+		// another.right.val = 12;
+		// another.left.left = new Tree();
+		// another.left.left.val = 7;
+		// another.right.right = new Tree();
+		// another.right.right.val = 8;
+		// // System.out.println(tree.equals(another));
+		// System.out.println(tree);
+		// tree.revert();
+		// System.out.println(tree);
+		// System.out.println(tree.isSymetric());
 
 	}
 
@@ -43,23 +45,17 @@ public class Tree {
 	}
 
 	public boolean isSymetric() {
-		return isSymetric(this);
+		return isSymetric(this.left, this.right);
 	}
-
-	private boolean isSymetric(Tree tree) {
-		if (tree.left == null && tree.right == null) {
+	
+	private boolean isSymetric(Tree left, Tree right) {
+		if (left == null && right == null)
 			return true;
-		}
-
-		if (tree.left == null || tree.right == null) {
+		if (left == null || right == null)
 			return false;
-		}
-
-		if (tree.left.val != tree.right.val) {
+		if (left.val != right.val)
 			return false;
-		}
-
-		return isSymetric(tree.left) && isSymetric(tree.right);
+		return isSymetric(left.left, right.right) && isSymetric(left.right, right.left);
 	}
 
 	public void revert() {
