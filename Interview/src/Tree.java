@@ -1,7 +1,7 @@
 public class Tree {
-	Tree left;
-	Tree right;
-	int val;
+	private Tree left;
+	private Tree right;
+	private int val;
 
 	public static void main(String[] args) {
 		Tree tree = new Tree();
@@ -31,6 +31,15 @@ public class Tree {
 		System.out.println(tree);
 		System.out.println(tree.isSymetric());
 
+	}
+
+	public Tree() {
+		this(null, null);
+	}
+
+	public Tree(Tree left, Tree right) {
+		this.left = left;
+		this.right = right;
 	}
 
 	public boolean isSymetric() {
@@ -72,6 +81,7 @@ public class Tree {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
+
 		stringBuilder.append(" value : ").append(this.val);
 
 		if (this.left != null) {
