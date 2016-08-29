@@ -1,3 +1,7 @@
+import java.awt.Checkbox;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tree {
 	private Tree left;
 	private Tree right;
@@ -5,17 +9,17 @@ public class Tree {
 
 	public static void main(String[] args) {
 		Tree tree = new Tree();
-		tree.val = 10;
+		tree.val = 1;
 		tree.left = new Tree();
-		tree.left.val = 10;
+		tree.left.val = 2;
 		tree.right = new Tree();
-		tree.right.val = 10;
+		tree.right.val = 1;
 		tree.left.left = new Tree();
-		tree.left.left.val = 10;
+		tree.left.left.val = 2;
 		tree.right.right = new Tree();
-		tree.right.right.val = 10;
+		tree.right.right.val = 1;
 
-		System.out.println(tree.isSymetric());
+		System.out.println(tree.getPath(3));
 
 		// Tree another = new Tree();
 		// another.val = 10;
@@ -72,6 +76,38 @@ public class Tree {
 
 		revertTree(tree.left);
 		revertTree(tree.right);
+	}
+	
+	/**
+	 * given sum that find all path lead to the sum
+	 * @param sum the number of tree value sum 
+	 * @return result the path lead to the sum
+	 */
+	
+	public List<String> getPath(int sum) {
+		List<String> result = new ArrayList<>();
+		
+		checkPath(result, new StringBuilder(), this, sum);
+		
+		return result;
+	}
+	
+	private void checkPath(List<String> result, StringBuilder path, Tree treeNode, int sum) {
+		if (treeNode == null) {
+			return;
+		}
+		
+		sum = sum - treeNode.val;
+		if (sum < 0) {
+			return;
+		}
+		path.append("->").append(treeNode.val);
+		if (sum == 0) {
+			result.add(path.toString());
+			return;
+		}
+		checkPath(result, new StringBuilder(path), treeNode.left, sum);	
+		checkPath(result, path, treeNode.right, sum);		
 	}
 
 	@Override
